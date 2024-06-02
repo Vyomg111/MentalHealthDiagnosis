@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <style>
+        body::-webkit-scrollbar {
+
+            display: none;
+
+        }
+
+        #searchbox {
+            outline: none;
+            border-radius: 25px;
+
+
+        }
+
+        .search {
+            position: relative;
+            width: 60px;
+            height: 40px;
+            background: white;
+            border-radius: 40px;
+            transition: 0.8s;
+            box-shadow: 0 0 0 5px rgb(149, 248, 248);
+            overflow: hidden;
+        }
+
+        .search.active {
+            width: 500px;
+        }
+
+        .search .icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+
+
+
+
+        }
+
+        .search .icon::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border: 3px solid rgb(149, 248, 248);
+            border-radius: 50%;
+            transform: translate(-4px, -4px);
+
+        }
+
+        .search .icon::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 12px;
+            background: rgb(149, 248, 248);
+            transform: translate(6px, 6px) rotate(315deg);
+
+        }
+
+        .search .input {
+            position: relative;
+            width: 320px;
+            height: 40px;
+            left: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .search .input input {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            padding: 10px 0;
+
+        }
+
+        .searchbtn {
+            position: absolute;
+            top: 35%;
+            transform: translate(-50%);
+            width: 15px;
+            height: 15px;
+            right: 101%;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clear {
+            position: absolute;
+            top: 35%;
+            transform: translate(-50%);
+            width: 15px;
+            height: 15px;
+            right: 15px;
+            background-color: rgb(255, 255, 255);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clear::before {
+            position: absolute;
+            content: '';
+            width: 1px;
+            height: 15px;
+            background-color: #999;
+            transform: rotate(45deg);
+        }
+
+        .clear::after {
+            position: absolute;
+            content: '';
+            width: 1px;
+            height: 15px;
+            background-color: #999;
+            transform: rotate(315deg);
+        }
+
+        #searchicon {
+            display: none;
+            position: absolute;
+            top: 5%;
+            transform: translate(-50%);
+            width: 25px;
+            height: 25px;
+            right: 90%;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mental Health Diagnosis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Mental Health Diagnosis</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Contact.html">Contact Us</a>
+                    </li>
+
+
+                </ul>
+
+
+
+            </div>
+            <div class="search">
+                <div class="icon">
+
+                </div>
+                <div class="input">
+                    <button class="searchbtn" type="button" onclick="checkSymptoms()"><img
+                            src="https://purepng.com/public/uploads/medium/search-icon-sl7.png" height="30px"
+                            id="searchicon"></button>
+
+                </div>
+
+
+                <!-- <span class="clear" onclick="document.getElementById('mysearchbar').value = '' "></span> -->
+
+            </div>
+    </nav>
+    <script>
+        function checkSymptoms() {
+            const user_symptoms = [];
+            for (let i = 0; i < 3; i++) {
+                var x = prompt("ENTER 3 THREE MAJOR SYMPTOMS:");
+                user_symptoms[i] = x;
+            }
+            const symptoms_schizo = ['delusions', 'hallucinations', 'cannot think','sudden changes in behavior','social isolation','trouble thinking'];
+            const symptoms_depression = ['nervous', 'feeling empty', 'hopeless', 'feeling worthless', 'guilty','always sad', 'no interest in anything', 'always irritated', 'always tired', 'insomnia'];
+            const symptoms_anxiety = ['racing heart', 'sweating', 'nausea', 'muscle tension', 'restlessness', 'cannot focus'];
+            const symptoms_bd = [ 'mood swings','elevated mood','anger','abnormally upset or happy', 'increased energy', 'less need of sleep', 'racing thoughts','overthinking','too much happy or sad'];
+            const symptoms_ptsd = ['nightmares', 'cannot remember', 'memory loss', 'negative thoughts', 'loss of interest', 'flashbacks', 'insomnia'];
+            const symptoms_nd = ['lack of motor skills', 'difficulty in learning ', 'lack of social skills','difficulty in acquring skills','difficult in remembering'];
+            const symptoms_ed = ['skipping meals', 'adopting abnormal eating habits', 'vomit after eating something', 'digestive issues', 'bloating','feeling of vomit after eating'];
+            const symptoms_md = ['emptyness', 'cannot focus', 'feeling sad everyday', 'thoughts of suicide ', 'thoughts of self harm', 'too much sleep', 'racing thoughts'];
+            const symptoms_pd = ['lacks trust', 'habit of holding grudge', 'not interested in other', 'lonelyness', 'limited emotions', 'no pleasure in anything', 'unusual thinking', 'unusual beliefs', 'seeing self as unstable', 'self harm', 'always seeking attention', 'concerned way too much about physical apperance', 'not flexible', 'seems like having another being inside'];
+              let count_of_symptoms = 0;
+            let count_schizo = 0, count_sd = 0, count_anx = 0, count_bd = 0, count_ptsd = 0, count_nd = 0, count_ed = 0, count_md = 0, count_pd = 0;
+            for (let j = 0; j < user_symptoms.length; j++) {
+                let x = user_symptoms[j];
+                for (let k = 0; k < symptoms_schizo.length; k++) {
+                    if (x == symptoms_schizo[k]) {
+                        count_schizo += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_depression.length; k++) {
+                    if (x == symptoms_depression[k]) {
+                        count_sd += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_anxiety.length; k++) {
+                    if (x == symptoms_anxiety[k]) {
+                        count_anx += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_bd.length; k++) {
+                    if (x == symptoms_bd[k]) {
+                        count_bd += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_ptsd.length; k++) {
+                    if (x == symptoms_ptsd[k]) {
+                        count_ptsd += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_nd.length; k++) {
+                    if (x == symptoms_nd[k]) {
+                        count_nd += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_ed.length; k++) {
+                    if (x == symptoms_ed[k]) {
+                        count_ed += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_md.length; k++) {
+                    if (x == symptoms_md[k]) {
+                        count_md += 1;
+                    }
+                }
+                for (let k = 0; k < symptoms_pd.length; k++) {
+                    if (x == symptoms_pd[k]) {
+                        count_pd += 1;
+                    }
+                }
+            }
+            let max = 0;
+            let name;
+            if (count_anx > max) {
+                max = count_anx;
+                name = "ANXIETY";
+            }
+
+            if (count_sd > max) {
+                max = count_sd;
+                name = "SEVERE DEPRESSION";
+            }
+
+            if (count_schizo > max) {
+                max = count_schizo;
+                name = "SCHIZOPHRENIA";
+            }
+
+            if (count_bd > max) {
+                max = count_bd;
+                name = "BIPOLAR DISORDER";
+            }
+
+            if (count_ed > max) {
+                max = count_ed;
+                name = "EATING DISORDER";
+            }
+
+            if (count_md > max) {
+                max = count_md;
+                name = "MOOD DISORDER";
+            }
+
+            if (count_nd > max) {
+                max = count_nd;
+                name = "NEURODEVELOPMENTAL DISORDER";
+            }
+
+            if (count_pd > max) {
+                max = count_pd;
+                name = "PERSONALITY DISORDER";
+            }
+
+            if (count_ptsd > max) {
+                max = count_ptsd;
+                name = "POST TRAUMATIC STRESS DISORDER";
+            }
+            alert("YOU MIGHT HAVE: " + name + " REDIRECTING YOU TO " + name + " PAGE...");
+            if (name == "SCHIZOPHRENIA") {
+                window.open("schizophrenia.html");
+            }
+            if (name == "ANXIETY") {
+                window.open("anxiety.html");
+            }
+            if (name == "BIPOLAR DISORDER") {
+                window.open("bd.html");
+            }
+            if (name == "EATING DISORDER") {
+                window.open("ed.html");
+            }
+            if (name == "MOOD DISORDER") {
+                window.open("md.html")
+            }
+            if (name == "NEURODEVELOPMENTAL DISORDER") {
+                window.open("nd.html");
+            }
+            if (name == "POST TRAUMATIC STRESS DISORDER") {
+                window.open("ptsd.html");
+            }
+            if (name == "SEVERE DEPRESSION") {
+                window.open("severedepression.html");
+            }
+            if(name =="PERSONALITY DISORDER"){
+                window.open("pd.html");
+            }
+
+        }
+    </script>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hello People!</strong> Mental Health is as important for a human being as its physical health. Do not
+        ignore your mental health.If facing serious issues for long time please consider a mental health expert doctor
+        for further assisstance.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1620131261457-25cdffccedff?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218MHx8c2NoaXpvcGhyZW5pYXx8fHx8fDE3MDQzNjA2MTc&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=600"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Schizophrenia</h5>
+                    <p class="card-text">Schizophrenia is like a glitch in the brain that messes up how a
+                        person thinks, feels, and acts. It can make them see or hear things that others don't, and
+                        sometimes their thoughts get all tangled up. It's like having a confusing and unpredictable
+                        mental movie playing in your head.</p>
+                    <a href="schizophrenia.html"><button type="button" class="btn btn-outline-primary">Learn
+                            More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1606103836293-0a063ee20566?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218MHx8ZGVwcmVzc2lvbnx8fHx8fDE3MDQzNjA5OTM&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=600"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Severe Depression</h5>
+                    <p class="card-text">Severe depression is like being stuck in a deep, dark pit where everything
+                        feels heavy, and even simple tasks seem impossible. It's like having a constant rain cloud over
+                        your head, making it hard to find joy in things you used to enjoy.</p>
+                    <a href="severedepression.html"><button type="button" class="btn btn-outline-primary">Learn
+                            More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1631881063057-af4ff82f668e?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&ixid=MnwxfDB8MXxyYW5kb218MHx8YW54aWV0eXx8fHx8fDE3MDQzNjEzNjU&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=900"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Anxiety</h5>
+                    <p class="card-text">Anxiety is a conditon where it feels like your brain hits the "worry" button,
+                        and it won't stop
+                        sending you notifications about things that may or may not happen. It's basically your mind
+                        playing the worst-case scenario on repeat, even if the situation isn't as bad as it seems.</p>
+                    <a href="anxiety.html"><button type="button" class="btn btn-outline-primary">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://www.myamericannurse.com/wp-content/uploads/2020/10/Bipolar-Disorder-2048x1538.jpg"
+                    class="card-img-top" alt="..." height="396px">
+                <div class="card-body">
+                    <h5 class="card-title">Bipolar Disorder</h5>
+                    <p class="card-text">Bipolar disorder is like having a mental roller coaster ride. Sometimes you're
+                        zooming up with lots of energy and excitement , and other times you're plummeting down
+                        feeling really low and down . It's like your mood has a mind of its own and keeps
+                        switching between extreme ups and downs.</p>
+                    <a href="bd.html"><button type="button" class="btn btn-outline-primary">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://media.istockphoto.com/vectors/post-traumatic-stress-disorder-vector-illustration-vector-id1053161918?k=6&m=1053161918&s=612x612&w=0&h=RwbLZW4_hMnGO9Akfnp1RmPLuWP_crMqd9SwHsWheAc="
+                    class="card-img-top" alt="..." height="396px" width="396px">
+                <div class="card-body">
+                    <h5 class="card-title">Post Traumatic Stress Disorder(PTSD)</h5>
+                    <p class="card-text">PTSD (Post-Traumatic Stress Disorder) is a conditon where your brain feels like
+                        getting stuck on a
+                        really scary or upsetting memory, and it keeps replaying, making it hard to move on. It's like
+                        having a mental replay button that brings back distressing experiences, even when you don't want
+                        it to.</p>
+                    <a href="ptsd.html"><button type="button" class="btn btn-outline-primary">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://th.bing.com/th/id/OIP.ImMqTzIPgP-PVSHmKanXLAHaET?rs=1&pid=ImgDetMain"
+                    class="card-img-top" alt="..." height="396px">
+                <div class="card-body">
+                    <h5 class="card-title">Neurodevelopmental Disorder</h5>
+                    <p class="card-text">
+                        A neurodevelopmental disorder is like a hiccup in the brain's usual growth and development. It
+                        can affect how someone's brain and nervous system develop, leading to differences in things like
+                        learning, behavior, and social skills. It's basically a unique wiring job in the brain that can
+                        bring both challenges and strengths.</p>
+                    <a href="nd.html"><button type="button" class="btn btn-outline-primary">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://kidshelpline.com.au/sites/default/files/thumbnail-T-ED_0.png" class="card-img-top"
+                    alt="..." height="396px">
+                <div class="card-body">
+                    <h5 class="card-title">Eating Disorder</h5>
+                    <p class="card-text">Imagine your brain's relationship with food is like a rollercoaster. Sometimes,
+                        it's all about controlling what you eat, like wanting to eat very little or none at all. Other
+                        times, it's like your brain's telling you to eat a lot, way more than your body
+                        needs . And then there's this other one where someone feels like
+                        they gotta throw up after eating, even though they don't want to.</p>
+                    <a href="ed.html"><button type="button" class="btn btn-outline-primary">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://starhealthline.com/wp-content/uploads/2021/04/Mood-Disorder.jpg" class="card-img-top"
+                    alt="..." height="396px">
+                <div class="card-body">
+                    <h5 class="card-title">Mood Disorder</h5>
+                    <p class="card-text">Mood disorders are when your feelings are all over the place, like a
+                        rollercoaster ride for your emotions. Imagine one day you're super happy, feeling like you're on
+                        top of the world, and then the next day, you're feeling really down, like everything's just
+                        bleh.</p>
+                    <a href="md.html"><button type="button" class="btn btn-outline-primary">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://mind.help/wp-content/uploads/2020/11/personality-disorder-site-768x400.jpg"
+                    class="card-img-top" alt="..." height="396px">
+                <div class="card-body">
+                    <h5 class="card-title">Personality Disorder.</h5>
+                    <p class="card-text">Personality disorders are like
+                        patterns in how people think, feel, and behave that
+                        are kinda different from what's considered normal. It's like everyone's got their own unique way
+                        of seeing the world and reacting to stuff, right? But with personality disorders, these ways of
+                        thinking and acting can cause problems in their relationships and daily life.</p>
+                    <a href="pd.html"><button type="button" class="btn btn-outline-primary">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+
+        </script>
+    <script> const icon = document.querySelector(".icon");
+        const search = document.querySelector(".search");
+        icon.onclick = function () {
+            search.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>
